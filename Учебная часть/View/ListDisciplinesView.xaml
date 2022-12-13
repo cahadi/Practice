@@ -1,0 +1,55 @@
+﻿<Page x:Class="Учебная_часть.View.ListDisciplinesView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Учебная_часть.View"
+      xmlns:model="clr-namespace:Учебная_часть.Models"
+      xmlns:tools="clr-namespace:Учебная_часть.Tools"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
+                <Label Content="+"/>
+                <Button Content="Добавить" Command="{Binding AddDiscipline}" FontSize="18"
+                               Margin="15 0 0 0"/>
+            </StackPanel>
+            <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
+                <Label Content="✎"/>
+                <Button Content="Редактировать" Command="{Binding EditDiscipline}" FontSize="18"
+                               Margin="15 0 0 0"/>
+            </StackPanel>
+            <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
+                <Label Content="🗑"/>
+                <Button Content="Удалить" Command="{Binding RemoveDiscipline}" FontSize="18"
+                               Margin="15 0 0 0"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1">
+                <Label Content="Поиск:"/>
+                <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" Background="AntiqueWhite"/>
+            </StackPanel>
+        </StackPanel>
+        <ListBox ItemsSource="{Binding Discipline}" Grid.RowSpan="3" SelectedItem="{Binding SelectedDiscipline}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <StackPanel>
+                            <Label Content="{Binding DisciplineIndex}"/>
+                            <Label Content="{Binding DisciplineName}"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Page>

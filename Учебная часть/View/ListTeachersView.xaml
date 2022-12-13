@@ -1,0 +1,44 @@
+﻿<Page x:Class="Учебная_часть.View.ListTeachersView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Учебная_часть.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ListTeachersView">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Button Content="Добавить дисциплину" Padding="3" Margin="5" Command="{Binding AddTeacher}"/>
+            <Button Content="Редактировать дисциплину" Padding="3" Margin="5" Command="{Binding EditTeacher}"/>
+            <Button Content="Удалить дисциплину" Padding="3" Margin="5" Command="{Binding RemoveTeacher}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Label Content="Поиск:"/>
+            <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" Background="AntiqueWhite"/>
+        </StackPanel>
+        <ListBox ItemsSource="{Binding Teacher}" Grid.RowSpan="3" SelectedItem="{Binding SelectedTeacher}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding TeacherSurname}"/>
+                            <Label Content="{Binding TeacherName}"/>
+                            <Label Content="{Binding TeacherPatronymic}"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Page>
