@@ -132,6 +132,7 @@ namespace Учебная_часть.ViewModel
             }
             catch
             {
+
             }
         }
     }

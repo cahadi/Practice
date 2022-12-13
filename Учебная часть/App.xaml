@@ -48,7 +48,7 @@
         <Style TargetType="ListBox">
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="Foreground" Value="{StaticResource Text}"/>
-            <Setter Property="Background" Value="{StaticResource List}"/>
+            <Setter Property="Background" Value="{StaticResource Textbox}"/>
         </Style>
 
         <Style TargetType="Menu">

@@ -10,46 +10,75 @@
       d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-        <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                <Label Content="+"/>
-                <Button Content="Добавить" Command="{Binding AddDiscipline}" FontSize="18"
+            <ColumnDefinition/>
+            <ColumnDefinition Width="60"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="Black">
+            <ListBox ItemsSource="{Binding Discipline}" SelectedItem="{Binding SelectedDiscipline}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding DisciplineIndex}"/>
+                                <Label Content="{Binding DisciplineName}"/>
+                                <Label Content="{Binding TypeDisciplines.TypeDisciplines}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+
+        <Border Grid.ColumnSpan="2" Width="60" Background="#FF1F1F1F"
+               HorizontalAlignment="Right">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.15"
+                                                         To="285"
+                                                         Storyboard.TargetProperty="Width"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.15"
+                                                         To="60"
+                                                         Storyboard.TargetProperty="Width"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+
+            <Grid>
+                <StackPanel Margin="3,3,3,3">
+                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
+                        <Label Content="+"/>
+                        <Button Content="Добавить"  Command="{Binding AddDiscipline}" FontSize="18"
                                Margin="15 0 0 0"/>
-            </StackPanel>
-            <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                <Label Content="✎"/>
-                <Button Content="Редактировать" Command="{Binding EditDiscipline}" FontSize="18"
+                    </StackPanel>
+                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
+                        <Label Content="✎"/>
+                        <Button Content="Редактировать" Command="{Binding EditDiscipline}" FontSize="18"
                                Margin="15 0 0 0"/>
-            </StackPanel>
-            <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                <Label Content="🗑"/>
-                <Button Content="Удалить" Command="{Binding RemoveDiscipline}" FontSize="18"
+                    </StackPanel>
+                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
+                        <Label Content="🗑"/>
+                        <Button Content="Удалить" Command="{Binding RemoveDiscipline}" FontSize="18"
                                Margin="15 0 0 0"/>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="1">
-                <Label Content="Поиск:"/>
-                <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" Background="AntiqueWhite"/>
-            </StackPanel>
-        </StackPanel>
-        <ListBox ItemsSource="{Binding Discipline}" Grid.RowSpan="3" SelectedItem="{Binding SelectedDiscipline}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <StackPanel>
-                            <Label Content="{Binding DisciplineIndex}"/>
-                            <Label Content="{Binding DisciplineName}"/>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

@@ -10,35 +10,75 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="60"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <Button Content="Добавить дисциплину" Padding="3" Margin="5" Command="{Binding AddTeacher}"/>
-            <Button Content="Редактировать дисциплину" Padding="3" Margin="5" Command="{Binding EditTeacher}"/>
-            <Button Content="Удалить дисциплину" Padding="3" Margin="5" Command="{Binding RemoveTeacher}"/>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="1">
-            <Label Content="Поиск:"/>
-            <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" Background="AntiqueWhite"/>
-        </StackPanel>
-        <ListBox ItemsSource="{Binding Teacher}" Grid.RowSpan="3" SelectedItem="{Binding SelectedTeacher}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="{Binding TeacherSurname}"/>
-                            <Label Content="{Binding TeacherName}"/>
-                            <Label Content="{Binding TeacherPatronymic}"/>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+
+        <Border Background="Black">
+            <ListBox ItemsSource="{Binding Teacher}" SelectedItem="{Binding SelectedTeacher}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding TeacherSurname}"/>
+                                <Label Content="{Binding TeacherName}"/>
+                                <Label Content="{Binding TeacherPatronymic}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+
+        <Border Grid.ColumnSpan="2" Width="60" Background="#FF1F1F1F"
+               HorizontalAlignment="Right">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.15"
+                                                         To="285"
+                                                         Storyboard.TargetProperty="Width"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.15"
+                                                         To="60"
+                                                         Storyboard.TargetProperty="Width"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+
+            <Grid>
+                <StackPanel Margin="3,3,3,3">
+                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
+                        <Label Content="+"/>
+                        <Button Content="Добавить"  Command="{Binding AddTeacher}" FontSize="18"
+                               Margin="15 0 0 0"/>
+                    </StackPanel>
+                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
+                        <Label Content="✎"/>
+                        <Button Content="Редактировать" Command="{Binding EditTeacher}" FontSize="18"
+                               Margin="15 0 0 0"/>
+                    </StackPanel>
+                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
+                        <Label Content="🗑"/>
+                        <Button Content="Удалить" Command="{Binding RemoveTeacher}" FontSize="18"
+                               Margin="15 0 0 0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

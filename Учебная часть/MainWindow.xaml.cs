@@ -63,6 +63,6 @@ namespace Учебная_часть
                 Application.Current.MainWindow.WindowState = WindowState.Normal;
             }
         }
-        //АААААААААААААААААА
+        
     }
 }
