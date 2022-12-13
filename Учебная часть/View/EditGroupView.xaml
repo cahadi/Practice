@@ -1,4 +1,4 @@
-﻿<Page x:Class="Учебная_часть.View.EditDisciplineView"
+﻿<Page x:Class="Учебная_часть.View.EditGroupView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,20 +6,20 @@
       xmlns:local="clr-namespace:Учебная_часть.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="EditDisciplineView">
+      Title="EditGroupView">
     <Grid>
         <StackPanel VerticalAlignment="Top" Margin="0,28,0,0">
-            <Label Content="Индекс дисциплины"/>
-            <TextBox Text="{Binding EditDiscipline.DisciplineIndex}"/>
-            <Label Content="Название дисциплины"/>
-            <TextBox Text="{Binding EditDiscipline.DisciplineName}"/>
-            <Label Content="Тип дисциплины"/>
-            <ComboBox ItemsSource="{Binding TypeDisciplines}" 
+            <Label Content="Номер группы"/>
+            <TextBox Text="{Binding EditGroup.GroupNumber}"/>
+            <Label Content="Количество студентов"/>
+            <TextBox Text="{Binding EditGroup.GroupCountStudent}"/>
+            <Label Content="Очная/заочная"/>
+            <ComboBox ItemsSource="{Binding TypeGroups}" 
                       DisplayMemberPath="TypeDisciplines"
-                      SelectedItem="{Binding EditDiscipline.TypeDiscipline}"/>
+                      SelectedItem="{Binding EditGroup.TypeGroup}"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Content="Вернуться" Command="{Binding BackToList}" Margin="70" Height="50" Width="100" FontSize="17"/>
-                <Button Content="Сохранить" Command="{Binding SaveDis}" Margin="70" Height="50" Width="100" FontSize="17"/>
+                <Button Content="Сохранить" Command="{Binding SaveGro}" Margin="70" Height="50" Width="100" FontSize="17"/>
             </StackPanel>
         </StackPanel>
     </Grid>

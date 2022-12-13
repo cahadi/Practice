@@ -11,45 +11,46 @@ using Учебная_часть.View;
 
 namespace Учебная_часть.ViewModel
 {
-    internal class EditDisciplineViewModel :BaseViewModel
+    internal class EditGroupViewModel : BaseViewModel
     {
-        private readonly MainViewModel mainViewModel;
+        private MainViewModel mainViewModel;
+        Group group;
 
-        public Discipline EditDiscipline { get; set; }
-        public ViewCommand SaveDis { get; set; }
+        public Group EditGroup { get; set; }
         public ViewCommand BackToList { get; set; }
-        public List<TypeDiscipline> TypeDisciplines { get; set; }
+        public ViewCommand SaveGro { get; set; }
+        public List<TypeGroup> TypeGroups { get; set; }
 
-        Discipline original;
-        public EditDisciplineViewModel(Discipline edit, MainViewModel mainViewModel)
+        public EditGroupViewModel(Group edit, MainViewModel mainViewModel)
         {
+            this.group = edit;
             this.mainViewModel = mainViewModel;
-            original = edit;
+
 
             var db = user30Context.GetInstance();
-            TypeDisciplines = db.TypeDisciplines.ToList();
-            this.EditDiscipline = new Discipline
+            TypeGroups = db.TypeGroups.ToList();
+            this.EditGroup = new Group
             {
-                DisciplineIndex = edit.DisciplineIndex,
-                DisciplineName = edit.DisciplineName,
-                TypeDisciplines = edit.TypeDisciplines
+                GroupNumber = edit.GroupNumber,
+                GroupCountStudent = edit.GroupCountStudent,
+                TypeGroup = edit.TypeGroup
             };
 
             BackToList = new ViewCommand(() =>
             {
-                mainViewModel.CurrentPage = new ListDisciplinesView(mainViewModel);
+                mainViewModel.CurrentPage = new ListGroupsView(mainViewModel);
             });
 
-            SaveDis = new ViewCommand(() =>
+            SaveGro = new ViewCommand(() =>
             {
-                if (edit.DisciplineName == null || edit.TypeDisciplines == null)
+                if (edit.GroupNumber == null || edit.GroupCountStudent == null)
                 {
                     MessageBox.Show("Вы не ввели данные");
                     return;
                 }
                 try
                 {
-                    user30Context.GetInstance().Entry<Discipline>(original).CurrentValues.SetValues(EditDiscipline);
+                    user30Context.GetInstance().Entry<Group>(group).CurrentValues.SetValues(EditGroup);
                     user30Context.GetInstance().SaveChanges();
                     BackToList.Execute(null);
                 }

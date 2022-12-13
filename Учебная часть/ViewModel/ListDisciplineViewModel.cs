@@ -25,17 +25,17 @@ namespace Учебная_часть.ViewModel
             }
         }
 
-        private DisGroupTeacher disGroupTeacher;
+        //private DisGroupTeacher disGroupTeacher;
 
-        public DisGroupTeacher DisGroupTeacher
-        {
-            get=> disGroupTeacher;
-            set
-            {
-                disGroupTeacher = value;
-                SignalChanged();
-            }
-        }
+        //public DisGroupTeacher DisGroupTeacher
+        //{
+        //    get=> disGroupTeacher;
+        //    set
+        //    {
+        //        disGroupTeacher = value;
+        //        SignalChanged();
+        //    }
+        //}
 
         private string search = "";
 
@@ -46,18 +46,6 @@ namespace Учебная_часть.ViewModel
             {
                 search = value;
                 DoSearch();
-            }
-        }
-
-        private Page currentPage;
-        public Page CurrentPage
-        {
-            get => currentPage;
-            set
-            {
-                currentPage = value;
-                SignalChanged();
-
             }
         }
 

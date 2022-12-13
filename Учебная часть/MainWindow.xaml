@@ -142,7 +142,7 @@
                                 </TransformGroup>
                             </Border.RenderTransform>
                         </Border>
-                        <Button Content="Документ 1" Command="{Binding }" FontSize="18"
+                        <Button Content="Документ 1" Command="{Binding Doc_1}" FontSize="18"
                                Margin="15 0 0 0"/>
                     </StackPanel>
                     <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">

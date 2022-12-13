@@ -26,6 +26,7 @@ namespace Учебная_часть.ViewModel
         public ViewCommand List_Disciplines { get; set; }
         public ViewCommand List_Teachers { get ; set; }
         public ViewCommand List_Groups { get; set; }
+        public ViewCommand Doc_1 { get; set; }
         public MainViewModel()
         {
             CurrentPage = new WelcomePage();
@@ -45,6 +46,10 @@ namespace Учебная_часть.ViewModel
             List_Groups = new ViewCommand(() =>
             {
                 CurrentPage = new ListGroupsView(this);
+            });
+            Doc_1 = new ViewCommand(() =>
+            {
+                CurrentPage = new Doc1View(this);
             });
         }
     }

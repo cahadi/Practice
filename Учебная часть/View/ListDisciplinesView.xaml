@@ -36,7 +36,7 @@
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1">
                 <Label Content="Поиск:"/>
-                <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" Background="AntiqueWhite"/>
+                <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </StackPanel>
         <ListBox ItemsSource="{Binding Discipline}" Grid.RowSpan="3" SelectedItem="{Binding SelectedDiscipline}">

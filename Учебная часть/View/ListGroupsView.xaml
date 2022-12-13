@@ -17,14 +17,26 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Column="1">
-            <Button Content="Добавить группу" Command="{Binding AddGroup}"/>
-            <Button Content="Редавктировать группу" Command="{Binding EditGroup}"/>
-            <Button Content="Удалить группу"  Command="{Binding RemoveGroup}"/>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="1">
-            <Label Content="Поиск"/>
-            <TextBox Text="{Binding Search}"/>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
+                <Label Content="+"/>
+                <Button Content="Добавить" Command="{Binding AddGroup}" FontSize="18"
+                               Margin="15 0 0 0"/>
+            </StackPanel>
+            <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
+                <Label Content="✎"/>
+                <Button Content="Редактировать" Command="{Binding EditGroup}" FontSize="18"
+                               Margin="15 0 0 0"/>
+            </StackPanel>
+            <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
+                <Label Content="🗑"/>
+                <Button Content="Удалить" Command="{Binding RemoveGroup}" FontSize="18"
+                               Margin="15 0 0 0"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1">
+                <Label Content="Поиск:"/>
+                <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
         </StackPanel>
         <ListBox ItemsSource="{Binding Group}" Grid.RowSpan="3" SelectedItem="{Binding SelectedGroup}">
             <ListBox.ItemTemplate>
