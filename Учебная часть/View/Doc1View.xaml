@@ -12,8 +12,9 @@
             <Label Content="Документ: Нагрузка"/>
             <Label Content="Выберите преподавателя"/>
             <ComboBox ItemsSource="{Binding Teachers}" 
-                      DisplayMemberPath="TeacherSurname"/>
-            <Button Content="Вывести файл нагрузки с данным преподавателем" Command="{Binding EnterExcel}"/>
+                      DisplayMemberPath="TeacherSurname"
+                      SelectedItem="{Binding SelectedTeacher.Teachers}"/>
+            <Button Content="Вывести файл нагрузки с данным преподавателем" Command="{Binding SeeDisGroupTeacher}"/>
         </StackPanel>
     </Grid>
 </Page>

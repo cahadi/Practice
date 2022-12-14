@@ -16,7 +16,7 @@
             <Label Content="Тип дисциплины"/>
             <ComboBox ItemsSource="{Binding TypeDisciplines}" 
                       DisplayMemberPath="TypeDisciplines"
-                      SelectedItem="{Binding EditDiscipline.TypeDiscipline}"/>
+                      SelectedItem="{Binding EditDiscipline.TypeDisciplines}"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Content="Вернуться" Command="{Binding BackToList}" Margin="70" Height="50" Width="100" FontSize="17"/>
                 <Button Content="Сохранить" Command="{Binding SaveDis}" Margin="70" Height="50" Width="100" FontSize="17"/>

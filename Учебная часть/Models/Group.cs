@@ -8,7 +8,7 @@ namespace Учебная_часть.Models
         public int GroupId { get; set; }
         public int GroupNumber { get; set; }
         public int GroupCountStudent { get; set; }
-        public int? TypeGroupId { get; set; }
+        public int? TypeGroupId { get; set; } = null;
 
         public virtual TypeGroup? TypeGroup { get; set; }
     }

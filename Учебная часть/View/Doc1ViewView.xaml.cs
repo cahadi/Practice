@@ -12,19 +12,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Учебная_часть.Models;
 using Учебная_часть.ViewModel;
 
 namespace Учебная_часть.View
 {
     /// <summary>
-    /// Логика взаимодействия для ListTeachersView.xaml
+    /// Логика взаимодействия для Doc1ViewView.xaml
     /// </summary>
-    public partial class ListTeachersView : Page
+    public partial class Doc1ViewView : Page
     {
-        public ListTeachersView(MainViewModel mainViewModel)
+        public Teacher teacher;
+        public Doc1ViewView(MainViewModel mainViewModel, Teacher app)
         {
             InitializeComponent();
-            DataContext = new ListTeacherViewModel(mainViewModel);
+            DataContext = new Doc1ViewViewModel(mainViewModel, app);
+
+            this.teacher = app;
+            text.Text = teacher.TeacherId.ToString();
         }
     }
 }

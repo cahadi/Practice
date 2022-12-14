@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using Учебная_часть.DB;
 using Учебная_часть.Models;
 using Учебная_часть.Tools;
+using Учебная_часть.View;
 
 namespace Учебная_часть.ViewModel
 {
@@ -37,7 +38,7 @@ namespace Учебная_часть.ViewModel
 
             AddTeacher = new ViewCommand(() =>
             {
-                mainViewModel.CurrentPage = new Page();
+                mainViewModel.CurrentPage = new EditTeacherView(new Teacher(), mainViewModel);
             });
             EditTeacher = new ViewCommand(() =>
             {
@@ -46,7 +47,7 @@ namespace Учебная_часть.ViewModel
                     MessageBox.Show("Выберите преводавателя");
                 }
                 else
-                    mainViewModel.CurrentPage = new Page();
+                    mainViewModel.CurrentPage = new EditTeacherView(SelectedTeacher, mainViewModel);
             });
             RemoveTeacher = new ViewCommand(() =>
             {

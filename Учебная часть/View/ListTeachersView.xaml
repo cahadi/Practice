@@ -19,13 +19,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <Button Content="Добавить дисциплину" Padding="3" Margin="5" Command="{Binding AddTeacher}"/>
-            <Button Content="Редактировать дисциплину" Padding="3" Margin="5" Command="{Binding EditTeacher}"/>
-            <Button Content="Удалить дисциплину" Padding="3" Margin="5" Command="{Binding RemoveTeacher}"/>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="1">
-            <Label Content="Поиск:"/>
-            <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" Background="AntiqueWhite"/>
+            <Button Content="Добавить преподавателя" Padding="3" Margin="5" Command="{Binding AddTeacher}"/>
+            <Button Content="Редактировать преподавателя" Padding="3" Margin="5" Command="{Binding EditTeacher}"/>
+            <Button Content="Удалить преподавателя" Padding="3" Margin="5" Command="{Binding RemoveTeacher}"/>
         </StackPanel>
         <ListBox ItemsSource="{Binding Teacher}" Grid.RowSpan="3" SelectedItem="{Binding SelectedTeacher}">
             <ListBox.ItemTemplate>

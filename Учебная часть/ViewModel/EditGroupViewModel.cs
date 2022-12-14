@@ -19,7 +19,6 @@ namespace Учебная_часть.ViewModel
         public Group EditGroup { get; set; }
         public ViewCommand BackToList { get; set; }
         public ViewCommand SaveGro { get; set; }
-        public List<TypeGroup> TypeGroups { get; set; }
 
         public EditGroupViewModel(Group edit, MainViewModel mainViewModel)
         {
@@ -28,12 +27,10 @@ namespace Учебная_часть.ViewModel
 
 
             var db = user30Context.GetInstance();
-            TypeGroups = db.TypeGroups.ToList();
             this.EditGroup = new Group
             {
                 GroupNumber = edit.GroupNumber,
-                GroupCountStudent = edit.GroupCountStudent,
-                TypeGroup = edit.TypeGroup
+                GroupCountStudent = edit.GroupCountStudent
             };
 
             BackToList = new ViewCommand(() =>
@@ -43,15 +40,16 @@ namespace Учебная_часть.ViewModel
 
             SaveGro = new ViewCommand(() =>
             {
-                if (edit.GroupNumber == null || edit.GroupCountStudent == null)
-                {
-                    MessageBox.Show("Вы не ввели данные");
-                    return;
-                }
                 try
                 {
+                    if(EditGroup.GroupCountStudent <= 0)
+                    {
+                        MessageBox.Show("Учащихся в группе не может быть меньше одного");
+                        return;
+                    }
                     user30Context.GetInstance().Entry<Group>(group).CurrentValues.SetValues(EditGroup);
                     user30Context.GetInstance().SaveChanges();
+                    SignalChanged();
                     BackToList.Execute(null);
                 }
                 catch

@@ -42,20 +42,22 @@ namespace Учебная_часть.ViewModel
 
             SaveDis = new ViewCommand(() =>
             {
-                if (edit.DisciplineName == null || edit.TypeDisciplines == null)
-                {
-                    MessageBox.Show("Вы не ввели данные");
-                    return;
-                }
                 try
                 {
+                    if (EditDiscipline.DisciplineName == null || EditDiscipline.TypeDisciplines == null)
+                    {
+                        MessageBox.Show("Вы не ввели данные");
+                        return;
+                    }
                     user30Context.GetInstance().Entry<Discipline>(original).CurrentValues.SetValues(EditDiscipline);
                     user30Context.GetInstance().SaveChanges();
+                    SignalChanged(nameof(EditDiscipline));
                     BackToList.Execute(null);
                 }
                 catch
                 {
                     MessageBox.Show("Ошибка");
+                    return ;
                 }
             });
         }

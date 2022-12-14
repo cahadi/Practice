@@ -62,7 +62,8 @@ namespace Учебная_часть.ViewModel
                     {
                         user30Context.GetInstance().Groups.Remove(SelectedGroup);
                         user30Context.GetInstance().SaveChanges();
-                        MessageBox.Show("Выбранная дисциплина удалена");
+                        SignalChanged();
+                        MessageBox.Show("Выбранная группа удалена");
                     }
                     catch
                     {

@@ -25,30 +25,6 @@ namespace Учебная_часть.ViewModel
             }
         }
 
-        //private DisGroupTeacher disGroupTeacher;
-
-        //public DisGroupTeacher DisGroupTeacher
-        //{
-        //    get=> disGroupTeacher;
-        //    set
-        //    {
-        //        disGroupTeacher = value;
-        //        SignalChanged();
-        //    }
-        //}
-
-        private string search = "";
-
-        public string Search
-        {
-            get => search;
-            set
-            {
-                search = value;
-                DoSearch();
-            }
-        }
-
         public Discipline SelectedDiscipline { get; set; }
 
         public ViewCommand AddDiscipline { get; set; }
@@ -84,7 +60,7 @@ namespace Учебная_часть.ViewModel
                     { 
                         user30Context.GetInstance().Disciplines.Remove(SelectedDiscipline);
                         user30Context.GetInstance().SaveChanges();
-                        DoSearch();
+                        SignalChanged();
                         MessageBox.Show("Выбранная дисциплина удалена");
                     }
                     catch
@@ -93,34 +69,6 @@ namespace Учебная_часть.ViewModel
                     }
                 }
             });
-        }
-
-        private void DoSearch()
-        {
-            try
-            {
-                var count = user30Context.GetInstance().Disciplines.Count();
-
-                var search = user30Context.GetInstance().Disciplines
-                    .Include("DisciplineIndex")
-                    .Include("DisciplineName")
-                    .Include("TypeDiscipline").Where(
-                    s => s.DisciplineIndex.Contains(Search) ||
-                    s.DisciplineName.Contains(Search) ||
-                    s.TypeDisciplines.TypeDisciplines.Contains(Search));
-
-                var dis = search.ToList();
-
-
-                if(dis.Count == 0)
-                {
-                    MessageBox.Show("По данному запросу ничего не найдено");
-                }
-                Discipline = dis;
-            }
-            catch
-            {
-            }
         }
     }
 }
