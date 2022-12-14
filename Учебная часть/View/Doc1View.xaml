@@ -8,13 +8,18 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Нагрузка">
     <Grid>
-        <StackPanel>
-            <Label Content="Документ: Нагрузка"/>
-            <Label Content="Выберите преподавателя"/>
-            <ComboBox ItemsSource="{Binding Teachers}" 
-                      DisplayMemberPath="TeacherSurname"
-                      SelectedItem="{Binding SelectedTeacher.Teachers}"/>
-            <Button Content="Вывести файл нагрузки с данным преподавателем" Command="{Binding SeeDisGroupTeacher}"/>
-        </StackPanel>
+        <ListBox ItemsSource="{Binding DisGroupTeacher}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding DisciplineId}"/>
+                            <Label Content="{Binding GroupId}"/>
+                            <Label Content="{Binding DTeacher.Teacher}"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>

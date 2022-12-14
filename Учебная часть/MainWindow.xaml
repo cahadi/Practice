@@ -129,54 +129,6 @@
                         <Button Content="Список групп" Command="{Binding List_Groups}" FontSize="18"
                                Margin="15 0 0 0"/>
                     </StackPanel>
-                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                        <Border CornerRadius="0,25,25,25"
-                        Width="30" Height="30" HorizontalAlignment="Center"
-                        Background="White" RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="135.791"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Border.RenderTransform>
-                        </Border>
-                        <Button Content="Документ 1" Command="{Binding Doc_1}" FontSize="18"
-                               Margin="15 0 0 0"/>
-                    </StackPanel>
-                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                        <Border CornerRadius="0,25,25,25"
-                        Width="30" Height="30" HorizontalAlignment="Center"
-                        Background="White" RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="135.791"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Border.RenderTransform>
-                        </Border>
-                        <Button Content="Документ 2" Command="{Binding }" FontSize="18"
-                               Margin="15 0 0 0"/>
-                    </StackPanel>
-                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                        <Border CornerRadius="0,25,25,25"
-                        Width="30" Height="30" HorizontalAlignment="Center"
-                        Background="White" RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="135.791"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Border.RenderTransform>
-                        </Border>
-                        <Button Content="Документ 3" Command="{Binding }" FontSize="18"
-                               Margin="15 0 0 0"/>
-                    </StackPanel>
                 </StackPanel>
             </Grid>
         </Border>

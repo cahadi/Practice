@@ -13,23 +13,34 @@ namespace Учебная_часть.ViewModel
     internal class Doc1ViewModel : BaseViewModel
     {
         MainViewModel mainViewModel;
+        Teacher app;
+        public DisGroupTeacher DTeacher { get; set; }
+        private List<DisGroupTeacher> disGroupTeachers;
+        public List<DisGroupTeacher> DisGroupTeacher
+        {
+            get => disGroupTeachers;
+            set
+            {
+                disGroupTeachers = value;
+                SignalChanged();
+            }
+        }
 
-        //public ViewCommand EnterExcel { get; set; }
-        public ViewCommand SeeDisGroupTeacher { get; set; }
+        public List<Teacher> Teacher { get; set; }
 
-        public List<Teacher> Teachers { get; set; }
-        public Teacher SelectedTeacher { get; set; }
 
-        public Doc1ViewModel(MainViewModel mainViewModel)
+        public Doc1ViewModel(MainViewModel mainViewModel, Teacher id)
         {
             this.mainViewModel = mainViewModel;
-            var db = user30Context.GetInstance();
-            Teachers = db.Teachers.ToList();
+            this.app = id;
 
-            SeeDisGroupTeacher = new ViewCommand(() =>
+            this.DTeacher = new DisGroupTeacher
             {
-                mainViewModel.CurrentPage = new Doc1ViewView(mainViewModel, SelectedTeacher);
-            });
+                Teacher = id.TeacherSurname
+            };
+
+            DisGroupTeacher = user30Context.GetInstance().DisGroupTeachers.Where(s => s.TeacherId == app.TeacherId).ToList();
+
         }
     }
 }

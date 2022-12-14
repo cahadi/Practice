@@ -28,28 +28,13 @@ namespace Учебная_часть.ViewModel
         }
 
         public Group SelectedGroup { get; set; }
-        public ViewCommand AddGroup { get; set; }
-        public ViewCommand EditGroup { get; set; }
+        
         public ViewCommand RemoveGroup { get; set; }
 
         public ListGroupViewModel(MainViewModel mainViewModel)
         {
             Group = user30Context.GetInstance().Groups.ToList();
 
-            AddGroup = new ViewCommand(() =>
-            {
-                mainViewModel.CurrentPage = new EditGroupView(new Group(), mainViewModel);
-            });
-            EditGroup = new ViewCommand(() =>
-            {
-                if (SelectedGroup == null)
-                {
-                    MessageBox.Show("Вы не выбрали группу");
-                    return;
-                }
-                else
-                    mainViewModel.CurrentPage = new EditGroupView(SelectedGroup, mainViewModel);
-            });
             RemoveGroup = new ViewCommand(() =>
             {
                 if (SelectedGroup == null)

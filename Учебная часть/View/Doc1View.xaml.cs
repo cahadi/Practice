@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Учебная_часть.Models;
 using Учебная_часть.ViewModel;
 
 namespace Учебная_часть.View
@@ -21,10 +22,10 @@ namespace Учебная_часть.View
     /// </summary>
     public partial class Doc1View : Page
     {
-        public Doc1View(MainViewModel mainViewModel)
+        public Doc1View(MainViewModel mainViewModel, Teacher id)
         {
             InitializeComponent();
-            DataContext = new Doc1ViewModel(mainViewModel);
+            DataContext = new Doc1ViewModel(mainViewModel, id);
         }
     }
 }

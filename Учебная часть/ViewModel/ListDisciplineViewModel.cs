@@ -27,27 +27,12 @@ namespace Учебная_часть.ViewModel
 
         public Discipline SelectedDiscipline { get; set; }
 
-        public ViewCommand AddDiscipline { get; set; }
-        public ViewCommand EditDiscipline { get; set; }
         public ViewCommand RemoveDiscipline { get; set; }
 
         public ListDisciplineViewModel(MainViewModel mainViewModel)
         {
             Discipline = user30Context.GetInstance().Disciplines.ToList();
 
-            AddDiscipline = new ViewCommand(() =>
-            {
-                mainViewModel.CurrentPage = new EditDisciplineView(new Discipline(), mainViewModel);
-            });
-            EditDiscipline = new ViewCommand(() =>
-            {
-                if(SelectedDiscipline == null)
-                {
-                    MessageBox.Show("Выберите дисциплину для редактирования");
-                    return;
-                }
-                mainViewModel.CurrentPage = new EditDisciplineView(SelectedDiscipline, mainViewModel);
-            });
             RemoveDiscipline = new ViewCommand(() =>
             {
                 if(SelectedDiscipline == null)
