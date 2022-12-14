@@ -10,7 +10,7 @@
       Title="WelcomePage">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="Вас приветствует компания Oriflame"/>
+            <Label HorizontalAlignment="Center" Content="Вас приветствует компания PPK"/>
             <Label Content="Похоже, вы заинтересованы нашей продукцией"/>
         </StackPanel>
     </Grid>

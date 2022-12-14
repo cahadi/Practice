@@ -5,6 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Учебная_часть"
         mc:Ignorable="d" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" MinHeight="650" MinWidth="800">
+    <Window.Resources>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="Red"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFFF5A5A"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <ControlTemplate x:Key="ExitButton" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
 
         <Grid.RowDefinitions>
@@ -17,19 +49,21 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Background="#FF1F1F1F"/>
+        <Grid Grid.Column="0" Background="#FF1F1F1F">
+            <Button  Content="🏠" Command="{Binding Welcome}" FontSize="18"/>
+        </Grid>
 
         <Grid Grid.Column="1" Background="Black" HorizontalAlignment="Stretch" MouseDown="Border_MouseDown">
-            <Label HorizontalAlignment="Left" Content="Учебный план" FontFamily="Segoe UI Black" Margin="0 5 0 0" FontSize="15"/>
+            <Label HorizontalAlignment="Left" Content="Учебный план" FontFamily="Segoe UI Black" Margin="10 5 0 0" FontSize="20"/>
 
             <StackPanel Margin="0 0 6 0" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button Content="—" FontSize="16" Padding="10" Margin="0 -5 0 0" Click="Button_Minimize_Click" />
-                <Button  Content="▭" FontSize="25" Padding="10" Margin="0 -9 0 0" Click="WindowStateButton_Click"/>
-                <Button  Content="✖" FontSize="15" Padding="10" Click="CloseButton_Click"/>
+                <Button Template="{DynamicResource OtherButton}" Content="—" FontSize="16" Padding="10" Margin="0 -5 0 0" Click="Button_Minimize_Click" />
+                <Button Template="{DynamicResource OtherButton}"  Content="▭" FontSize="25" Padding="10" Margin="0 -9 0 0" Click="WindowStateButton_Click"/>
+                <Button Template="{DynamicResource ExitButton}"  Content="✖" FontSize="15" Padding="10" Click="CloseButton_Click"/>
             </StackPanel>
         </Grid>
 
-        <Border Grid.ColumnSpan="2" Grid.Row="1" Background="Black" Margin="60 0 0 0">
+        <Border Grid.ColumnSpan="2" Grid.Row="1" Background="#FF101011" Margin="60 0 0 0">
             <Frame NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}"/>
         </Border>
 
@@ -65,6 +99,7 @@
 
             <Grid>
                 <StackPanel Margin="3,3,3,3">
+
                     <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
                         <Border CornerRadius="0,25,25,25"
                         Width="30" Height="30" HorizontalAlignment="Center"
@@ -78,9 +113,10 @@
                                 </TransformGroup>
                             </Border.RenderTransform>
                         </Border>
-                        <Button Content="Начальная страница" Command="{Binding Welcome}" FontSize="18"
-                               Margin="15 0 0 0"/>
+                        <Button Template="{DynamicResource OtherButton}" Content="Список групп" Command="{Binding List_Groups}" FontSize="18"
+                               Margin="15 0 0 0" Padding="55 0 55 0"/>
                     </StackPanel>
+
                     <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
                         <Border CornerRadius="0,25,25,25"
                         Width="30" Height="30" HorizontalAlignment="Center"
@@ -94,9 +130,10 @@
                                 </TransformGroup>
                             </Border.RenderTransform>
                         </Border>
-                        <Button Content="Список дисциплин" Command="{Binding List_Disciplines}" FontSize="18"
-                               Margin="15 0 0 0"/>
+                        <Button Template="{DynamicResource OtherButton}" Content="Список дисциплин" Command="{Binding List_Disciplines}" FontSize="18"
+                               Margin="15 0 0 0" Padding="35 0 35 0 "/>
                     </StackPanel>
+
                     <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
                         <Border CornerRadius="0,25,25,25"
                         Width="30" Height="30" HorizontalAlignment="Center"
@@ -110,73 +147,13 @@
                                 </TransformGroup>
                             </Border.RenderTransform>
                         </Border>
-                        <Button Content="Список преподавателей" Command="{Binding List_Teachers}" FontSize="18"
-                               Margin="15 0 0 0"/>
+                        <Button Template="{DynamicResource OtherButton}" Content="Список преподавателей" Command="{Binding List_Teachers}" FontSize="18"
+                               Margin="15 0 0 0" Padding="10 0 10 0"/>
                     </StackPanel>
-                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                        <Border CornerRadius="0,25,25,25"
-                        Width="30" Height="30" HorizontalAlignment="Center"
-                        Background="White" RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="135.791"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Border.RenderTransform>
-                        </Border>
-                        <Button Content="Список групп" Command="{Binding List_Groups}" FontSize="18"
-                               Margin="15 0 0 0"/>
-                    </StackPanel>
-                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                        <Border CornerRadius="0,25,25,25"
-                        Width="30" Height="30" HorizontalAlignment="Center"
-                        Background="White" RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="135.791"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Border.RenderTransform>
-                        </Border>
-                        <Button Content="Документ 1" Command="{Binding }" FontSize="18"
-                               Margin="15 0 0 0"/>
-                    </StackPanel>
-                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                        <Border CornerRadius="0,25,25,25"
-                        Width="30" Height="30" HorizontalAlignment="Center"
-                        Background="White" RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="135.791"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Border.RenderTransform>
-                        </Border>
-                        <Button Content="Документ 2" Command="{Binding }" FontSize="18"
-                               Margin="15 0 0 0"/>
-                    </StackPanel>
-                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                        <Border CornerRadius="0,25,25,25"
-                        Width="30" Height="30" HorizontalAlignment="Center"
-                        Background="White" RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="135.791"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Border.RenderTransform>
-                        </Border>
-                        <Button Content="Документ 3" Command="{Binding }" FontSize="18"
-                               Margin="15 0 0 0"/>
-                    </StackPanel>
+                    
+                    
+                    
+                    
                 </StackPanel>
             </Grid>
         </Border>

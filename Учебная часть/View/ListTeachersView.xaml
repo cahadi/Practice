@@ -14,7 +14,7 @@
             <ColumnDefinition Width="60"/>
         </Grid.ColumnDefinitions>
 
-        <Border Background="Black">
+        <Border>
             <ListBox ItemsSource="{Binding Teacher}" SelectedItem="{Binding SelectedTeacher}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -62,20 +62,15 @@
 
             <Grid>
                 <StackPanel Margin="3,3,3,3">
-                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                        <Label Content="+"/>
-                        <Button Content="Добавить"  Command="{Binding AddTeacher}" FontSize="18"
-                               Margin="15 0 0 0"/>
+                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="8 0 0 0">
+                        <Label Content="🗑" />
+                        <Button Template="{DynamicResource OtherButton}" Content="Удалить" Command="{Binding RemoveTeacher}" FontSize="18"
+                               Padding="50 0 50 0"/>
                     </StackPanel>
-                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                        <Label Content="✎"/>
-                        <Button Content="Редактировать" Command="{Binding EditTeacher}" FontSize="18"
-                               Margin="15 0 0 0"/>
-                    </StackPanel>
-                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                        <Label Content="🗑"/>
-                        <Button Content="Удалить" Command="{Binding RemoveTeacher}" FontSize="18"
-                               Margin="15 0 0 0"/>
+                    <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Margin="14 0 0 0">
+                        <Image Source="/Image/excelImage.png" Height="30" Width="30"/>
+                        <Button Template="{DynamicResource OtherButton}" Content="Импортировать в Excel" Command="{Binding }" FontSize="18"
+                                Padding="10 0 10 0"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>

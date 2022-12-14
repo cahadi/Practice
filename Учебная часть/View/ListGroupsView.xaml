@@ -13,7 +13,7 @@
             <ColumnDefinition Width="60"/>
         </Grid.ColumnDefinitions>
 
-        <Border Background="Black">
+        <Border>
             <ListBox ItemsSource="{Binding Group}" SelectedItem="{Binding SelectedGroup}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -59,23 +59,18 @@
             </Border.Style>
 
             <Grid>
-                <StackPanel Margin="3,3,3,3">
-                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                        <Label Content="+"/>
-                        <Button Content="Добавить"  Command="{Binding AddGroup}" FontSize="18"
-                               Margin="15 0 0 0"/>
-                    </StackPanel>
-                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                        <Label Content="✎"/>
-                        <Button Content="Редактировать" Command="{Binding EditGroup}" FontSize="18"
-                               Margin="15 0 0 0"/>
-                    </StackPanel>
-                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                        <Label Content="🗑"/>
-                        <Button Content="Удалить" Command="{Binding RemoveGroup}" FontSize="18"
-                               Margin="15 0 0 0"/>
-                    </StackPanel>
+            <StackPanel Margin="3,3,3,3">
+                <!--<StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="8 0 0 0">
+                    <Label Content="🗑" />
+                    <Button Template="{DynamicResource OtherButton}" Content="Удалить" Command="{Binding RemoveGroup}" FontSize="18"
+                               Padding="50 0 50 0"/>
+                </StackPanel>-->
+                <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Margin="14 0 0 0">
+                    <Image Source="/Image/excelImage.png" Height="30" Width="30"/>
+                    <Button Template="{DynamicResource OtherButton}" Content="Импортировать в Excel" Command="{Binding }" FontSize="18"
+                                Padding="10 0 10 0"/>
                 </StackPanel>
+            </StackPanel>
             </Grid>
         </Border>
     </Grid>

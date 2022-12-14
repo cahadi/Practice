@@ -21,7 +21,7 @@ namespace Учебная_часть.View
     /// </summary>
     public partial class ListGroupsView : Page
     {
-        public ListGroupsView(ViewModel.MainViewModel mainViewModel)
+        public ListGroupsView(MainViewModel mainViewModel)
         {
             InitializeComponent();
             DataContext = new ListGroupViewModel(mainViewModel);

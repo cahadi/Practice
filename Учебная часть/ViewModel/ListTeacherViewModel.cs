@@ -27,31 +27,16 @@ namespace Учебная_часть.ViewModel
 
         public Teacher SelectedTeacher { get; set; }
 
-        public ViewCommand AddTeacher { get; set; }
-        public ViewCommand EditTeacher { get; set; }
         public ViewCommand RemoveTeacher { get; set; }
 
         public ListTeacherViewModel(MainViewModel mainViewModel)
         {
             Teacher = user30Context.GetInstance().Teachers.ToList();
 
-            AddTeacher = new ViewCommand(() =>
-            {
-                mainViewModel.CurrentPage = new Page();
-            });
-            EditTeacher = new ViewCommand(() =>
-            {
-                if (SelectedTeacher == null)
-                {
-                    MessageBox.Show("Выберите преводавателя");
-                }
-                else
-                    mainViewModel.CurrentPage = new Page();
-            });
             RemoveTeacher = new ViewCommand(() =>
             {
                 if (SelectedTeacher == null)
-                    MessageBox.Show("Для удаления необхлдимо выбрать преводавателя");
+                    MessageBox.Show("Для удаления необходимо выбрать преподавателя");
 
 
             });

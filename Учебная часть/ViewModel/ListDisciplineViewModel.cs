@@ -25,65 +25,14 @@ namespace Учебная_часть.ViewModel
             }
         }
 
-        private DisGroupTeacher disGroupTeacher;
-
-        public DisGroupTeacher DisGroupTeacher
-        {
-            get=> disGroupTeacher;
-            set
-            {
-                disGroupTeacher = value;
-                SignalChanged();
-            }
-        }
-
-        private string search = "";
-
-        public string Search
-        {
-            get => search;
-            set
-            {
-                search = value;
-                DoSearch();
-            }
-        }
-
-        private Page currentPage;
-        public Page CurrentPage
-        {
-            get => currentPage;
-            set
-            {
-                currentPage = value;
-                SignalChanged();
-
-            }
-        }
-
         public Discipline SelectedDiscipline { get; set; }
 
-        public ViewCommand AddDiscipline { get; set; }
-        public ViewCommand EditDiscipline { get; set; }
         public ViewCommand RemoveDiscipline { get; set; }
 
         public ListDisciplineViewModel(MainViewModel mainViewModel)
         {
             Discipline = user30Context.GetInstance().Disciplines.ToList();
 
-            AddDiscipline = new ViewCommand(() =>
-            {
-                mainViewModel.CurrentPage = new EditDisciplineView(new Discipline(), mainViewModel);
-            });
-            EditDiscipline = new ViewCommand(() =>
-            {
-                if(SelectedDiscipline == null)
-                {
-                    MessageBox.Show("Выберите дисциплину для редактирования");
-                    return;
-                }
-                mainViewModel.CurrentPage = new EditDisciplineView(SelectedDiscipline, mainViewModel);
-            });
             RemoveDiscipline = new ViewCommand(() =>
             {
                 if(SelectedDiscipline == null)
@@ -96,7 +45,6 @@ namespace Учебная_часть.ViewModel
                     { 
                         user30Context.GetInstance().Disciplines.Remove(SelectedDiscipline);
                         user30Context.GetInstance().SaveChanges();
-                        DoSearch();
                         MessageBox.Show("Выбранная дисциплина удалена");
                     }
                     catch
@@ -105,35 +53,6 @@ namespace Учебная_часть.ViewModel
                     }
                 }
             });
-        }
-
-        private void DoSearch()
-        {
-            try
-            {
-                var count = user30Context.GetInstance().Disciplines.Count();
-
-                var search = user30Context.GetInstance().Disciplines
-                    .Include("DisciplineIndex")
-                    .Include("DisciplineName")
-                    .Include("TypeDiscipline").Where(
-                    s => s.DisciplineIndex.Contains(Search) ||
-                    s.DisciplineName.Contains(Search) ||
-                    s.TypeDisciplines.TypeDisciplines.Contains(Search));
-
-                var dis = search.ToList();
-
-
-                if(dis.Count == 0)
-                {
-                    MessageBox.Show("По данному запросу ничего не найдено");
-                }
-                Discipline = dis;
-            }
-            catch
-            {
-
-            }
         }
     }
 }
