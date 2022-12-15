@@ -1,21 +1,18 @@
-﻿using System;
+﻿using Aspose.Cells;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Учебная_часть.DB;
 using Учебная_часть.Models;
 using Учебная_часть.Tools;
-using Учебная_часть.View;
-using IronXL;
-using Aspose.Cells;
-using Microsoft.Win32;
-using System.IO;
-using System.Windows;
 
 namespace Учебная_часть.ViewModel
 {
-    internal class Doc1ViewModel : BaseViewModel
+    internal class Doc2ViewModel :BaseViewModel
     {
         MainViewModel mainViewModel;
         DisGroupTeacher app;
@@ -30,10 +27,10 @@ namespace Учебная_часть.ViewModel
             }
         }
 
-        public List<Teacher> Teachers { get; set; }
+        public List<Group> Groups { get; set; }
         public string fileName = "";
-        public string FileName 
-        { 
+        public string FileName
+        {
             get => fileName;
             set
             {
@@ -43,23 +40,23 @@ namespace Учебная_часть.ViewModel
         }
         public ViewCommand Enter { get; set; }
 
-        public Doc1ViewModel(MainViewModel mainViewModel, Teacher ap)
+        public Doc2ViewModel(MainViewModel mainViewModel, Group ap)
         {
             this.mainViewModel = mainViewModel;
 
             var db = user30Context.GetInstance();
-            app = db.DisGroupTeachers.FirstOrDefault(s=> s.TeacherId == ap.TeacherId);
+            app = db.DisGroupTeachers.FirstOrDefault(s => s.GroupId == ap.GroupId);
             //app.Teacher = db.Teachers.FirstOrDefault(s=> s.TeacherId == ap.TeacherId);
-            Teachers = db.Teachers.ToList();
+            Groups = db.Groups.ToList();
 
             try
             {
-                DisGroupTeacher = user30Context.GetInstance().DisGroupTeachers.Where(s => s.TeacherId == app.TeacherId).ToList();
-                foreach(var ds in DisGroupTeacher)
+                DisGroupTeacher = user30Context.GetInstance().DisGroupTeachers.Where(s => s.GroupId == app.GroupId).ToList();
+                foreach (var ds in DisGroupTeacher)
                 {
-                    ds.Teacher = Teachers.FirstOrDefault(s=> s.TeacherId == ds.TeacherId);  //B3  A3 - ФИО
-                    ds.Discipline = db.Disciplines.FirstOrDefault(s=> s.DisciplineId == ds.DisciplineId);  //B7 - B...  B4 - Дисциплина
-                    ds.Group = db.Groups.FirstOrDefault(s => s.GroupId == ds.GroupId);  //C7 - C...  C4 - Группа
+                    ds.Teacher = db.Teachers.FirstOrDefault(s => s.TeacherId == ds.TeacherId); 
+                    ds.Discipline = db.Disciplines.FirstOrDefault(s => s.DisciplineId == ds.DisciplineId); 
+                    ds.Group = Groups.FirstOrDefault(s => s.GroupId == ds.GroupId); 
                 }
             }
             catch
@@ -76,27 +73,33 @@ namespace Учебная_часть.ViewModel
                 if (fileExist)
                 {
                     wb = new Workbook(path);
-                    Worksheet worksheet = wb.Worksheets.Add(ap.TeacherSurname);
+                    Worksheet worksheet = wb.Worksheets.Add($"{ap.GroupNumber}");
                     Cells cells = worksheet.Cells;
-                    Aspose.Cells.Cell cell = cells["B3"];
-                    cell.PutValue($"{ap.TeacherSurname} {ap.TeacherName} {ap.TeacherPatronymic}");
-                    cell = cells["A3"];
-                    cell.PutValue("ФИО");
-                    cell = cells["B6"];
-                    cell.PutValue("Дисциплина"); 
-                    cell = cells["C6"];
-                    cell.PutValue("Группа");
+                    Aspose.Cells.Cell cell = cells["V4"];
+                    cell.PutValue($"{ap.GroupCountStudent}");
+                    cell = cells["U4"];
+                    cell.PutValue("Кол-во студентов");
 
-                    int i = 7;
+                    cell = cells["A8"];
+                    cell.PutValue("Индекс");
+                    cell = cells["B8"];
+                    cell.PutValue("Дисциплина");
+                    cell = cells["AB8"];
+                    cell.PutValue("Преподаватель");
+
+                    int i = 9;
                     foreach (var a in DisGroupTeacher)
                     {
+                        cell = cells[$"A{i}"];
+                        cell.PutValue($"{a.Discipline.DisciplineIndex}");
                         cell = cells[$"B{i}"];
                         cell.PutValue($"{a.Discipline.DisciplineName}");
-                        cell = cells[$"C{i}"];
-                        cell.PutValue($"{a.Group.GroupNumber}");
+                        cell = cells[$"AB{i}"];
+                        cell.PutValue($"{a.Teacher.TeacherSurname} {a.Teacher.TeacherName} {a.Teacher.TeacherPatronymic}");
                         i++;
                     }
                     wb.Save(path, SaveFormat.Xlsx);
+
                     MessageBox.Show("Отправлено");
                 }
                 else

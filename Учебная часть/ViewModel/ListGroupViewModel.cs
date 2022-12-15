@@ -28,34 +28,23 @@ namespace Учебная_часть.ViewModel
         }
 
         public Group SelectedGroup { get; set; }
-        
-        public ViewCommand RemoveGroup { get; set; }
+        public ViewCommand GroupExcel { get; set; }
 
         public ListGroupViewModel(MainViewModel mainViewModel)
         {
             Group = user30Context.GetInstance().Groups.ToList();
 
-            RemoveGroup = new ViewCommand(() =>
+            GroupExcel = new ViewCommand(() =>
             {
+
                 if (SelectedGroup == null)
                 {
-                    MessageBox.Show("Выберите группу для удаления");
+                    MessageBox.Show("Для отправления формы необходимо выбрать группу");
+                    return;
                 }
-                else
-                {
-                    try
-                    {
-                        user30Context.GetInstance().Groups.Remove(SelectedGroup);
-                        user30Context.GetInstance().SaveChanges();
-                        SignalChanged();
-                        MessageBox.Show("Выбранная группа удалена");
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Ошибка");
-                    }
-                }
+                mainViewModel.CurrentPage = new Doc2View(mainViewModel, SelectedGroup);
             });
+
         }
 
     }

@@ -36,11 +36,6 @@ namespace Учебная_часть.ViewModel
         {
             Teacher = user30Context.GetInstance().Teachers.ToList();
 
-            RemoveTeacher = new ViewCommand(() =>
-            {
-                if (SelectedTeacher == null)
-                    MessageBox.Show("Для удаления необходимо выбрать преподавателя");
-            });
             TeacherExcel = new ViewCommand(() =>
             {
                 if (SelectedTeacher == null)

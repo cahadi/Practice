@@ -19,7 +19,6 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <Button Content="Удалить" Padding="3" Margin="5" Command="{Binding RemoveTeacher}"/>
             <Button Content="В Excel" Padding="3" Margin="5" Command="{Binding TeacherExcel}"/>
         </StackPanel>
         <ListBox ItemsSource="{Binding Teacher}" Grid.RowSpan="3" SelectedItem="{Binding SelectedTeacher}">

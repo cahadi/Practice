@@ -8,6 +8,8 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using System.Windows.Controls;
 using Учебная_часть.View;
+using System.IO;
+using Aspose.Cells;
 
 namespace Учебная_часть.ViewModel
 {
@@ -25,35 +27,86 @@ namespace Учебная_часть.ViewModel
             }
         }
 
-        public Discipline SelectedDiscipline { get; set; }
+        //public Discipline SelectedDiscipline { get; set; }
+        //public ViewCommand DisciplineExcel { get; set; }
+        //public string fileName = "";
+        //public string FileName
+        //{
+        //    get => fileName;
+        //    set
+        //    {
+        //        fileName = value;
+        //        SignalChanged();
+        //    }
+        //}
+        //private List<DisGroupTeacher> disGroupTeachers;
+        //public List<DisGroupTeacher> DisGroupTeacher
+        //{
+        //    get => disGroupTeachers;
+        //    set
+        //    {
+        //        disGroupTeachers = value;
+        //        SignalChanged();
+        //    }
+        //}
 
-        public ViewCommand RemoveDiscipline { get; set; }
-
+        //DisGroupTeacher app;
         public ListDisciplineViewModel(MainViewModel mainViewModel)
         {
-            Discipline = user30Context.GetInstance().Disciplines.ToList();
+            var db = user30Context.GetInstance();
+            Discipline = db.Disciplines.ToList();
+            //try
+            //{
+            //    DisGroupTeacher = db.DisGroupTeachers.ToList();
+                
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("Ошибка");
+            //}
 
-            RemoveDiscipline = new ViewCommand(() =>
-            {
-                if(SelectedDiscipline == null)
-                {
-                    MessageBox.Show("Выберите дисциплину для удаления");
-                }
-                else
-                {
-                    try
-                    { 
-                        user30Context.GetInstance().Disciplines.Remove(SelectedDiscipline);
-                        user30Context.GetInstance().SaveChanges();
-                        SignalChanged();
-                        MessageBox.Show("Выбранная дисциплина удалена");
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Ошибка");
-                    }
-                }
-            });
+            //DisciplineExcel = new ViewCommand(() =>
+            //{
+
+            //    //if (SelectedDiscipline == null)
+            //    //{
+            //    //    MessageBox.Show("Для отправления формы необходимо выбрать дисциплину");
+            //    //    return;
+            //    //}
+            //    //mainViewModel.CurrentPage = new Doc3View(mainViewModel, SelectedDiscipline);
+            //    string path = $@"C:\Users\{Environment.UserName}\Desktop\{FileName}.xlsx";
+            //    bool fileExist = File.Exists(path);
+
+            //    Workbook wb;
+            //    if (fileExist)
+            //    {
+            //        wb = new Workbook(path);
+            //        Worksheet worksheet = wb.Worksheets.Add($"");
+            //        Cells cells = worksheet.Cells;
+            //        Aspose.Cells.Cell cell = cells["B6"];
+            //        cell.PutValue("Индекс");
+            //        cell = cells["C6"];
+            //        cell.PutValue("Наименование дисциплин");
+
+
+            //        int i =21;
+            //        foreach (var a in DisGroupTeacher)
+            //        {
+            //            cell = cells[$"B{i}"];
+            //            cell.PutValue($"{a.Discipline.DisciplineIndex}");
+            //            cell = cells[$"C{i}"];
+            //            cell.PutValue($"{a.Discipline.DisciplineName}");
+            //            i++;
+            //        }
+            //        wb.Save(path, SaveFormat.Xlsx);
+            //        MessageBox.Show("Отправлено");
+            //    }
+            //    else
+            //    {
+            //        File.Create(path).Close();
+            //        MessageBox.Show("Файл создан. Нажмите ещё раз для отправления");
+            //    }
+            //});
         }
     }
 }
