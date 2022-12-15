@@ -31,7 +31,15 @@ namespace Учебная_часть.ViewModel
 
         public ListDisciplineViewModel(MainViewModel mainViewModel)
         {
-            Discipline = user30Context.GetInstance().Disciplines.ToList();
+            try
+            {
+                Discipline = user30Context.GetInstance().Disciplines.ToList();
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось подключиться к базе данных");
+            }
+            
 
             RemoveDiscipline = new ViewCommand(() =>
             {

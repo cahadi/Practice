@@ -9,9 +9,16 @@
       
       Title="WelcomePage">
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label HorizontalAlignment="Center" Content="Вас приветствует компания PPK"/>
-            <Label Content="Похоже, вы заинтересованы нашей продукцией"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <Image HorizontalAlignment="Right" Margin="0 0 20 50" Source="/Image/PPKw.png" Width="250"/>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Label FontSize="70"  Content="Вас приветствует"/>
+            <Label FontSize="70"   Content="компания PPK"/>
         </StackPanel>
+        <Label FontSize="35" Margin="0 250 0 0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Похоже, вы заинтересованы нашей продукцией"/>
     </Grid>
 </Page>

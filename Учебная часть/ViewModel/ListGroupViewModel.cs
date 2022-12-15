@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Учебная_часть.DB;
 using Учебная_часть.Models;
 using Учебная_часть.Tools;
@@ -15,7 +16,15 @@ namespace Учебная_часть.ViewModel
 
         public ListGroupViewModel(MainViewModel mainViewModel)
         {
-            Group = user30Context.GetInstance().Groups.ToList();
+            try
+            {
+                
+                Group = user30Context.GetInstance().Groups.ToList();
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось подключиться к базе данных");
+            }
         }
 
         public List<Group> Group

@@ -31,13 +31,32 @@ namespace Учебная_часть.ViewModel
 
         public ListTeacherViewModel(MainViewModel mainViewModel)
         {
-            Teacher = user30Context.GetInstance().Teachers.ToList();
+            try
+            {
+                Teacher = user30Context.GetInstance().Teachers.ToList();
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось подключиться к базе данных");
+            }
 
             RemoveTeacher = new ViewCommand(() =>
             {
                 if (SelectedTeacher == null)
                     MessageBox.Show("Для удаления необходимо выбрать преподавателя");
-
+                else
+                {
+                    try
+                    {
+                        user30Context.GetInstance().Teachers.Remove(SelectedTeacher);
+                        user30Context.GetInstance().SaveChanges();
+                        MessageBox.Show("Выбранный преподаватель удалён");
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Ошибка");
+                    }
+                }
 
             });
         }

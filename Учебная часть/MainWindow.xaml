@@ -36,6 +36,30 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+
+        <ControlTemplate x:Key="HomeButton" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="#FF444E42"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="#FF4D6349"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Window.Resources>
     <Grid>
 
@@ -50,12 +74,14 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0" Background="#FF1F1F1F">
-            <Button  Content="🏠" Command="{Binding Welcome}" FontSize="18"/>
+            <Button Template="{DynamicResource HomeButton}"  Content="🏠" Command="{Binding Welcome}" FontSize="18"/>
         </Grid>
 
         <Grid Grid.Column="1" Background="Black" HorizontalAlignment="Stretch" MouseDown="Border_MouseDown">
-            <Label HorizontalAlignment="Left" Content="Учебный план" FontFamily="Segoe UI Black" Margin="10 5 0 0" FontSize="20"/>
-
+            <StackPanel Orientation="Horizontal" Margin="30 0 0 0">
+                <Image Source="/Image/PPKw.png" Width="35" Margin="0 5 0 0"/>
+                <Label HorizontalAlignment="Left" Content="Учебный план" FontFamily="Segoe UI Black" Margin="10 5 0 0" FontSize="20"/>
+            </StackPanel>
             <StackPanel Margin="0 0 6 0" HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button Template="{DynamicResource OtherButton}" Content="—" FontSize="16" Padding="10" Margin="0 -5 0 0" Click="Button_Minimize_Click" />
                 <Button Template="{DynamicResource OtherButton}"  Content="▭" FontSize="25" Padding="10" Margin="0 -9 0 0" Click="WindowStateButton_Click"/>
@@ -150,10 +176,6 @@
                         <Button Template="{DynamicResource OtherButton}" Content="Список преподавателей" Command="{Binding List_Teachers}" FontSize="18"
                                Margin="15 0 0 0" Padding="10 0 10 0"/>
                     </StackPanel>
-                    
-                    
-                    
-                    
                 </StackPanel>
             </Grid>
         </Border>

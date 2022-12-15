@@ -6,10 +6,16 @@
     <RootNamespace>Учебная_часть</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Image\ppk.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Image\excelImage.png" />
+    <None Remove="Image\PPKw.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Image\PPKw.png" />
   </ItemGroup>
 
   <ItemGroup>
