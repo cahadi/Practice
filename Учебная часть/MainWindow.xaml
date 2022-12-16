@@ -83,9 +83,9 @@
                 <Label HorizontalAlignment="Left" Content="Учебный план" FontFamily="Segoe UI Black" Margin="10 5 0 0" FontSize="20"/>
             </StackPanel>
             <StackPanel Margin="0 0 6 0" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button Template="{DynamicResource OtherButton}" Content="—" FontSize="16" Padding="10" Margin="0 -5 0 0" Click="Button_Minimize_Click" />
-                <Button Template="{DynamicResource OtherButton}"  Content="▭" FontSize="25" Padding="10" Margin="0 -9 0 0" Click="WindowStateButton_Click"/>
-                <Button Template="{DynamicResource ExitButton}"  Content="✖" FontSize="15" Padding="10" Click="CloseButton_Click"/>
+                <Button Template="{DynamicResource OtherButton}" Content="—" FontSize="16" Padding="10" Margin="0 -5 0 0" Command="{Binding MinimizedWindow}"/>
+                <Button Template="{DynamicResource OtherButton}"  Content="▭" FontSize="25" Padding="10" Margin="0 -9 0 0" Command="{Binding StateWindow}"/>
+                <Button Template="{DynamicResource ExitButton}"  Content="✖" FontSize="15" Padding="10" Command="{Binding CloseButtonClick}"/>
             </StackPanel>
         </Grid>
 
@@ -175,22 +175,6 @@
                         </Border>
                         <Button Template="{DynamicResource OtherButton}" Content="Список преподавателей" Command="{Binding List_Teachers}" FontSize="18"
                                Margin="15 0 0 0" Padding="10 0 10 0"/>
-                    </StackPanel>
-                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="15 3 0 10">
-                        <Border CornerRadius="0,25,25,25"
-                        Width="30" Height="30" HorizontalAlignment="Center"
-                        Background="White" RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="135.791"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Border.RenderTransform>
-                        </Border>
-                        <Button Content="Список групп" Command="{Binding List_Groups}" FontSize="18"
-                               Margin="15 0 0 0"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>

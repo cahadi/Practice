@@ -17,6 +17,13 @@ namespace Учебная_часть.ViewModel
     {
         private List<Discipline> disciplines;
 
+        private DisGroupTeacher disGroupTeacher;
+
+        private Page currentPage;
+        public Discipline SelectedDiscipline { get; set; }
+        public ViewCommand AddDiscipline { get; set; }
+        public ViewCommand EditDiscipline { get; set; }
+        public ViewCommand RemoveDiscipline { get; set; }
         public List<Discipline> Discipline
         {
             get => disciplines;
@@ -26,8 +33,6 @@ namespace Учебная_часть.ViewModel
                 SignalChanged();
             }
         }
-
-        private DisGroupTeacher disGroupTeacher;
 
         public DisGroupTeacher DisGroupTeacher
         {
@@ -39,19 +44,6 @@ namespace Учебная_часть.ViewModel
             }
         }
 
-        private string search = "";
-
-        public string Search
-        {
-            get => search;
-            set
-            {
-                search = value;
-                DoSearch();
-            }
-        }
-
-        private Page currentPage;
         public Page CurrentPage
         {
             get => currentPage;
@@ -62,17 +54,16 @@ namespace Учебная_часть.ViewModel
 
             }
         }
-
-        public Discipline SelectedDiscipline { get; set; }
-
-        public ViewCommand AddDiscipline { get; set; }
-        public ViewCommand EditDiscipline { get; set; }
-        public ViewCommand RemoveDiscipline { get; set; }
-
         public ListDisciplineViewModel(MainViewModel mainViewModel)
         {
-            var db = user30Context.GetInstance();
-            Discipline = db.Disciplines.ToList();
+            try
+            {
+                Discipline = user30Context.GetInstance().Disciplines.ToList();
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось подключиться к базе данных");
+            }
         }
     }
 }

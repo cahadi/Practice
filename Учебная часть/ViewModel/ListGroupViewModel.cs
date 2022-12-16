@@ -16,7 +16,8 @@ namespace Учебная_часть.ViewModel
     public class ListGroupViewModel : BaseViewModel
     {
         private List<Group> group;
-
+        public Group SelectedGroup { get; set; }
+        public ViewCommand GroupExcel { get; set; }
         public List<Group> Group
         {
             get => group;
@@ -26,13 +27,16 @@ namespace Учебная_часть.ViewModel
                 SignalChanged();
             }
         }
-
-        public Group SelectedGroup { get; set; }
-        public ViewCommand GroupExcel { get; set; }
-
         public ListGroupViewModel(MainViewModel mainViewModel)
         {
-            Group = user30Context.GetInstance().Groups.ToList();
+            try
+            {
+                Group = user30Context.GetInstance().Groups.ToList();
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось подключиться к базе данных");
+            }
 
             GroupExcel = new ViewCommand(() =>
             {
@@ -44,7 +48,6 @@ namespace Учебная_часть.ViewModel
                 }
                 mainViewModel.CurrentPage = new Doc2View(mainViewModel, SelectedGroup);
             });
-
         }
 
     }

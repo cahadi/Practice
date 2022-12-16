@@ -18,8 +18,14 @@ namespace Учебная_часть.ViewModel
     internal class Doc1ViewModel : BaseViewModel
     {
         MainViewModel mainViewModel;
+
         DisGroupTeacher app;
+
+        public string fileName = "";
+
         private List<DisGroupTeacher> disGroupTeachers;
+        public ViewCommand Enter { get; set; }
+        public List<Teacher> Teachers { get; set; }
         public List<DisGroupTeacher> DisGroupTeacher
         {
             get => disGroupTeachers;
@@ -30,8 +36,6 @@ namespace Учебная_часть.ViewModel
             }
         }
 
-        public List<Teacher> Teachers { get; set; }
-        public string fileName = "";
         public string FileName 
         { 
             get => fileName;
@@ -41,8 +45,6 @@ namespace Учебная_часть.ViewModel
                 SignalChanged();
             }
         }
-        public ViewCommand Enter { get; set; }
-
         public Doc1ViewModel(MainViewModel mainViewModel, Teacher ap)
         {
             this.mainViewModel = mainViewModel;

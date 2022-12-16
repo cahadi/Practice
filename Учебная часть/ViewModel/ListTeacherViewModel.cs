@@ -15,7 +15,9 @@ namespace Учебная_часть.ViewModel
     public class ListTeacherViewModel : BaseViewModel
     {
         private List<Teacher> teacher;
-
+        public Teacher SelectedTeacher { get; set; }
+        public ViewCommand RemoveTeacher { get; set; }
+        public ViewCommand TeacherExcel { get; set; }
         public List<Teacher> Teacher
         {
             get => teacher;
@@ -25,13 +27,6 @@ namespace Учебная_часть.ViewModel
                 SignalChanged();
             }
         }
-
-        public Teacher SelectedTeacher { get; set; }
-
-        public ViewCommand RemoveTeacher { get; set; }
-        public ViewCommand TeacherExcel { get; set; }
-
-
         public ListTeacherViewModel(MainViewModel mainViewModel)
         {
             try
