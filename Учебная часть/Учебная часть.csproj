@@ -10,15 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Image\excelImage.png" />
-    <None Remove="Image\PPKw.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Image\PPKw.png" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Aspose.Cells" Version="22.12.0" />
+    <PackageReference Include="IronXL.Excel" Version="2022.12.10926" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

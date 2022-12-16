@@ -8,6 +8,8 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using System.Windows.Controls;
 using Учебная_часть.View;
+using System.IO;
+using Aspose.Cells;
 
 namespace Учебная_часть.ViewModel
 {
@@ -25,42 +27,52 @@ namespace Учебная_часть.ViewModel
             }
         }
 
+        private DisGroupTeacher disGroupTeacher;
+
+        public DisGroupTeacher DisGroupTeacher
+        {
+            get=> disGroupTeacher;
+            set
+            {
+                disGroupTeacher = value;
+                SignalChanged();
+            }
+        }
+
+        private string search = "";
+
+        public string Search
+        {
+            get => search;
+            set
+            {
+                search = value;
+                DoSearch();
+            }
+        }
+
+        private Page currentPage;
+        public Page CurrentPage
+        {
+            get => currentPage;
+            set
+            {
+                currentPage = value;
+                SignalChanged();
+
+            }
+        }
+
         public Discipline SelectedDiscipline { get; set; }
 
+        public ViewCommand AddDiscipline { get; set; }
+        public ViewCommand EditDiscipline { get; set; }
         public ViewCommand RemoveDiscipline { get; set; }
 
         public ListDisciplineViewModel(MainViewModel mainViewModel)
         {
-            try
-            {
-                Discipline = user30Context.GetInstance().Disciplines.ToList();
-            }
-            catch
-            {
-                MessageBox.Show("Не удалось подключиться к базе данных");
-            }
-            
-
-            RemoveDiscipline = new ViewCommand(() =>
-            {
-                if(SelectedDiscipline == null)
-                {
-                    MessageBox.Show("Выберите дисциплину для удаления");
-                }
-                else
-                {
-                    try
-                    { 
-                        user30Context.GetInstance().Disciplines.Remove(SelectedDiscipline);
-                        user30Context.GetInstance().SaveChanges();
-                        MessageBox.Show("Выбранная дисциплина удалена");
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Ошибка");
-                    }
-                }
-            });
+            var db = user30Context.GetInstance();
+            Discipline = db.Disciplines.ToList();
         }
     }
 }

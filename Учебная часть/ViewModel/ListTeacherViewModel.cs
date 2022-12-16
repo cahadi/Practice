@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using Учебная_часть.DB;
 using Учебная_часть.Models;
 using Учебная_часть.Tools;
+using Учебная_часть.View;
 
 namespace Учебная_часть.ViewModel
 {
@@ -28,6 +29,8 @@ namespace Учебная_часть.ViewModel
         public Teacher SelectedTeacher { get; set; }
 
         public ViewCommand RemoveTeacher { get; set; }
+        public ViewCommand TeacherExcel { get; set; }
+
 
         public ListTeacherViewModel(MainViewModel mainViewModel)
         {
@@ -40,24 +43,16 @@ namespace Учебная_часть.ViewModel
                 MessageBox.Show("Не удалось подключиться к базе данных");
             }
 
-            RemoveTeacher = new ViewCommand(() =>
+            TeacherExcel = new ViewCommand(() =>
             {
                 if (SelectedTeacher == null)
                     MessageBox.Show("Для удаления необходимо выбрать преподавателя");
                 else
                 {
-                    try
-                    {
-                        user30Context.GetInstance().Teachers.Remove(SelectedTeacher);
-                        user30Context.GetInstance().SaveChanges();
-                        MessageBox.Show("Выбранный преподаватель удалён");
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Ошибка");
-                    }
+                    MessageBox.Show("Для отправления формы необходимо выбрать преподавателя");
+                    return;
                 }
-
+                mainViewModel.CurrentPage = new Doc1View(mainViewModel, SelectedTeacher);
             });
         }
     }

@@ -9,5 +9,6 @@ namespace Учебная_часть.Models
         public string TeacherSurname { get; set; } = null!;
         public string TeacherName { get; set; } = null!;
         public string? TeacherPatronymic { get; set; }
+
     }
 }

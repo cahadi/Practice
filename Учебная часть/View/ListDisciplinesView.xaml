@@ -33,71 +33,17 @@
         </ControlTemplate>
     </Page.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="60"/>
-        </Grid.ColumnDefinitions>
-
-        <Border >
-            <ListBox ItemsSource="{Binding Discipline}" SelectedItem="{Binding SelectedDiscipline}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <StackPanel Orientation="Horizontal">
-                                <Label Content="{Binding DisciplineIndex}"/>
-                                <Label Content="{Binding DisciplineName}"/>
-                                <Label Content="{Binding TypeDisciplines.TypeDisciplines}"/>
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Border>
-
-        <Border Grid.ColumnSpan="2" Width="60" Background="#FF1F1F1F"
-               HorizontalAlignment="Right">
-            <Border.Style>
-                <Style TargetType="Border">
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0.15"
-                                                         To="285"
-                                                         Storyboard.TargetProperty="Width"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0.15"
-                                                         To="60"
-                                                         Storyboard.TargetProperty="Width"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Border.Style>
-
-            <Grid>
-                <StackPanel Margin="3,3,3,3">
-                    <StackPanel  VerticalAlignment="Top" Orientation="Horizontal" Margin="8 0 0 0">
-                        <Label Content="🗑" />
-                        <Button Template="{DynamicResource OtherButton}" Content="Удалить" Command="{Binding RemoveDiscipline}" FontSize="18"
-                               Padding="50 0 50 0"/>
-                    </StackPanel>
-                    <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Margin="14 0 0 0">
-                        <Image Source="/Image/excelImage.png" Height="30" Width="30"/>
-                        <Button Template="{DynamicResource OtherButton}" Content="Импортировать в Excel" Command="{Binding }" FontSize="18"
-                                Padding="10 0 10 0"/>
-                    </StackPanel>
-                </StackPanel>
-            </Grid>
-        </Border>
+        <ListBox ItemsSource="{Binding Discipline}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <StackPanel>
+                            <Label Content="{Binding DisciplineIndex}"/>
+                            <Label Content="{Binding DisciplineName}"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>

@@ -1,4 +1,4 @@
-﻿<Page x:Class="Учебная_часть.View.ListGroupsView"
+﻿<Page x:Class="Учебная_часть.View.Doc1View"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,27 +6,28 @@
       xmlns:local="clr-namespace:Учебная_часть.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ListGroupsView">
+      Title="Нагрузка">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="60"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
-           <Button Content="В Excel" Command="{Binding GroupExcel}"/>
+        <StackPanel>
+            <Label Content="Название файла"/>
+            <TextBox Text="{Binding FileName}"/>
+            <Button Content="Вывести" Command="{Binding Enter}"/>
         </StackPanel>
-        <ListBox ItemsSource="{Binding Group}" Grid.RowSpan="3" SelectedItem="{Binding SelectedGroup}">
+        <ListBox ItemsSource="{Binding DisGroupTeacher}" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="{Binding GroupNumber}"/>
-                            <Label Content="{Binding GroupCountStudent}"/>
+                            <Label Content="{Binding Discipline.DisciplineIndex}"/>
+                            <Label Content="{Binding Discipline.DisciplineName}"/>
+                            <Label Content="{Binding Group.GroupNumber}"/>
+                            <Label Content="{Binding Teacher.TeacherSurname}"/>
+                            <Label Content="{Binding Teacher.TeacherName}"/>
+                            <Label Content="{Binding Teacher.TeacherPatronymic}"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
